@@ -1,185 +1,172 @@
-import { motion } from 'framer-motion';
-import { Github, Mail, Twitter, Code, Terminal, PenTool as Tool, Palette } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+// src/pages/AboutApp.tsx
+import { useState } from "react";
+import {
+    FaAndroid,
+    FaInfoCircle,
+    FaCode,
+    FaUser,
+    FaEnvelope,
+    FaShieldAlt,
+    FaShareAlt,
+} from "react-icons/fa";
 
-const About = () => {
-    const { t } = useTranslation();
+interface AboutProps {
+    theme: "light" | "dark";
+    toggleTheme: () => void;
+}
+
+const AboutApp: React.FC<AboutProps> = ({ theme }) => {
+    const [isVersionDialogOpen, setVersionDialogOpen] = useState(false);
+    const [isDownloadIosDialogOpen, setDownloadIosDialogOpen] = useState(false);
+
+    const openVersionDialog = () => setVersionDialogOpen(true);
+    const closeVersionDialog = () => setVersionDialogOpen(false);
+
+    const closeDownloadIosDialog = () => setDownloadIosDialogOpen(false);
 
     const darkThemeColors = {
-        background: '#0F1511',
-        surface: '#1B211D',
-        text: '#DFE4DD',
-        primary: '#91D5AC', // Цвет, который используется для заголовка
-        primaryDark: '#276A49' // Добавляем primaryDark
+        background: "#122428",
+        surface: "#14442e",
+        text: "#86efac",
+        primary: "#22c55e",
     };
 
-    const skills = [
-        {
-            category: t('about.skills.frontend'),
-            icon: Code,
-            items: ['Jetpack Compose', 'Kotlin', 'Java', 'React', 'Vue3', 'TypeScript', 'Tailwind CSS'],
-            color: 'from-blue-500 to-cyan-500'
-        },
-        {
-            category: t('about.skills.backend'),
-            icon: Terminal,
-            items: ['Firebase Firestore & Database', 'MySQL', 'Node.js', 'Python'],
-            color: 'from-green-500 to-emerald-500'
-        },
-        {
-            category: t('about.skills.tools'),
-            icon: Tool,
-            items: ['Google Cloud Platform', 'Google Analytics', 'Firebase', 'Git', 'GitHub', 'Canva'],
-            color: 'from-orange-500 to-amber-500'
-        },
-        {
-            category: t('about.skills.other'),
-            icon: Palette,
-            items: ['UI/UX Design', 'Music Production', 'Performance Optimization', 'Testing'],
-            color: 'from-purple-500 to-pink-500'
-        }
-    ];
-
-    const socialLinks = [
-        { icon: Github, href: 'https://github.com/byteflipper-58', color: 'hover:text-primaryDark' },
-        { icon: Twitter, href: 'https://X.com/byteflipper', color: 'hover:text-primaryDark' },
-        { icon: Mail, href: 'mailto:byteflipper.business@gmail.com', color: 'hover:text-primaryDark' }
-    ];
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.1
-            }
-        }
+    const lightThemeColors = {
+        background: "#f6fbf4",
+        surface: "#eaeaea",
+        text: "#171d19",
+        primary: "#276a49",
     };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.5
-            }
-        }
-    };
+    const colors = theme === "dark" ? darkThemeColors : lightThemeColors;
 
     return (
-        <div style={{ backgroundColor: darkThemeColors.background }} className="py-28 px-4 min-h-screen flex items-center justify-center w-full overflow-hidden">
-            <div className="w-full max-w-screen-xl space-y-20 mx-auto">
-                {/* Hero Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center relative"
+        <div className="min-h-screen flex flex-col items-center justify-center overflow-y-auto w-screen" style={{ backgroundColor: colors.background }}>
+            {/* Основной контейнер */}
+            <div className="w-full sm:w-screen space-y-4 px-4 sm:px-12 py-6">
+                {/* Карточка с названием приложения */}
+                <div
+                    className="w-full border rounded-xl p-12 text-center mt-16" // Добавлен mt-16 для отступа сверху
+                    style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
                 >
-                    <div className="relative w-32 h-32 mx-auto mb-8">
-                        <motion.div
-                            className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-start to-primary-end opacity-75 blur-lg"
-                            animate={{
-                                scale: [1, 1.2, 1],
-                                rotate: [0, 180, 360],
-                            }}
-                            transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                repeatType: "reverse"
-                            }}
-                        />
-                        <img
-                            src="/images/my-picture.jpg"
-                            alt="Profile"
-                            className="relative rounded-full w-full h-full object-cover border-4 border-dark-100"
-                        />
-                    </div>
-
-                    <h1 style={{ color: darkThemeColors.primary }} className="text-4xl md:text-5xl font-bold mb-4 pb-2 bg-gradient-to-r from-primary-start to-primary-end bg-clip-text">
-                        {t('Ибрагим')}
-                    </h1>
-                    <p style={{ color: darkThemeColors.text }} className="text-lg mb-8 max-w-2xl mx-auto">
-                        {t('Мой путь в программировании начался с создания модов для Minecraft PE под загрузчик модов InnerCore, ныне известный как Horizon. Во время работы я познакомился с крутыми людьми, которые значительно помогли мне развить навыки программирования. Мы стали командой друзей, придумавшей себе звание "Сектанты". С тех пор я продолжаю создавать приложения и инструменты, вдохновляясь технологиями и музыкой. Узнайте больше о моём опыте и подходе к разработке!')}
+                    <h2 className="text-[25px] sm:text-[30px] font-bold" style={{ color: colors.text }}>
+                        FF Sensitivities Raf
+                    </h2>
+                    <p className="text-xl sm:text-2xl" style={{ color: colors.primary }}>
+                        from ByteFlipper
                     </p>
+                </div>
 
-                    <div className="flex justify-center gap-6">
-                        {socialLinks.map((social, index) => (
-                            <motion.a
-                                key={index}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                whileHover={{ scale: 1.1, y: -2 }}
-                                className={`text-light-300 ${darkThemeColors.primaryDark} transition-colors`}
-                            >
-                                <social.icon size={24} />
-                            </motion.a>
-                        ))}
+                {/* Остальные карточки */}
+                {[
+                    { icon: null, text: "FF Sensitivities Raf – это вторичный клиент приложения FF Sensitivities.\n" +
+                            "                            ByteFlipper является единственным автором и владельцем мобильного и веб-приложения FF Sensitivities.\n" +
+                            "                            Разработка FF Sensitivities Raf основана на оригинальном приложении и не является его официальной версией.\n" +
+                            "                            Все права на оригинальный код, данные и бренд принадлежат ByteFlipper.\n" +
+                            "                            Автор FF Sensitivities оставляет за собой право потребовать удаления данного вторичного клиента в любое время.\n" +
+                            "\n" +
+                            "                            Этот проект распространяется без каких-либо гарантий", onClick: null},
+                    { icon: <FaInfoCircle size={24} style={{ color: colors.primary }} />, text: "Версия: 1.0", onClick: openVersionDialog },
+                    { icon: <img src="/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
+                    { icon: <FaShieldAlt size={24} style={{ color: colors.primary }} />, text: "Политика приватности", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
+                    { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Исходный код", onClick: () => window.open("https://github.com/Raf0707/ffsensitivities_web", "_blank") },
+                    { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в Google Play", onClick: () => window.open("https://play.google.com/store/apps/details?id=com.byteflipper.ffsensitivities", "_blank") },
+                    { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в RuStore", onClick: () => window.open("https://www.rustore.ru/catalog/app/com.byteflipper.ffsensitivities", "_blank") },
+                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "Рафаил Кикматулин", onClick: () => window.open("https://github.com/Raf0707", "_blank") },
+                    { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "raf_android-dev@mail.ru", onClick: () => window.open("mailto:raf_android-dev@mail.ru", "_blank") },
+                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "ByteFlipper", onClick: () => window.open("https://github.com/ByteFlipper-58", "_blank") },
+                    { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "byteflipper.business@gmail.com", onClick: () => window.open("mailto:byteflipper.business@gmail.com", "_blank") },
+                    { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Другие Приложения", onClick: () => window.open("https://www.rustore.ru/catalog/developer/90b1826e", "_blank") },
+                    { icon: <FaShareAlt size={24} style={{ color: colors.primary }} />, text: "Поделиться приложением", onClick: () => window.open("https://raf0707.github.io/zickreee_web", "_blank") },
+                ].map((card, index) => (
+                    <div
+                        key={index}
+                        className="w-full border rounded-xl p-6 text-center cursor-pointer"
+                        style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
+                        onClick={card.onClick ? card.onClick : undefined}
+                    >
+
+                    <div className="flex items-center justify-center space-x-4">
+                            {card.icon}
+                            <p className="text-xl sm:text-2xl" style={{ color: colors.text }}>
+                                {card.text}
+                            </p>
+                        </div>
                     </div>
-                </motion.div>
-
-                {/* Skills Section */}
-                <motion.div
-                    key={t('about.skills.frontend')} // Add key to force re-render on language change
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8"
-                >
-                    {skills.map((skillGroup, index) => (
-                        <motion.div
-                            key={`${skillGroup.category}-${index}`}
-                            variants={itemVariants}
-                            className="relative group"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-dark-200 to-dark-300 rounded-xl blur opacity-75 group-hover:opacity-100 transition-opacity" />
-                            <div style={{ backgroundColor: darkThemeColors.surface }} className="relative p-6 rounded-xl border border-dark-300 group-hover:border-primary-end/20 transition-colors">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className={`p-2 rounded-lg bg-gradient-to-r ${skillGroup.color}`}>
-                                        <skillGroup.icon className="w-6 h-6 text-light-100" />
-                                    </div>
-                                    <h3 style={{ color: darkThemeColors.text }} className="text-xl font-bold">
-                                        {skillGroup.category}
-                                    </h3>
-                                </div>
-                                <div className="flex flex-wrap gap-2">
-                                    {skillGroup.items.map((skill, skillIndex) => (
-                                        <motion.span
-                                            key={`${skill}-${skillIndex}`}
-                                            whileHover={{ scale: 1.05 }}
-                                            className="px-3 py-1 bg-dark-300 rounded-full text-light-200 text-sm border border-dark-400 group-hover:border-primary-end/20 transition-colors"
-                                        >
-                                            {skill}
-                                        </motion.span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* Quote Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center relative"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary-start/10 to-primary-end/10 rounded-xl blur-xl" />
-                    <blockquote style={{ backgroundColor: darkThemeColors.surface }} className="relative p-8 rounded-xl border border-dark-300">
-                        <div className="text-6xl text-primary-end opacity-20 absolute top-4 left-4">"</div>
-                        <p style={{ color: darkThemeColors.text }} className="text-2xl italic relative z-10">
-                            {t('Каждый проект — это не просто код, это возможность сделать мир немного удобнее и интереснее')}
-                        </p>
-                        <div className="text-6xl text-primary-end opacity-20 absolute bottom-4 right-4">"</div>
-                    </blockquote>
-                </motion.div>
+                ))}
             </div>
+
+            {/* Диалоговое окно для версии */}
+            {isVersionDialogOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center">
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#86efac] mb-4">
+                            Версия 1.0
+                        </h3>
+                        <p className="text-lg sm:text-xl text-[#4ade80]">
+                            Текущая версия приложения: 1.0, но если у вас есть пожелания по новому функционалу —
+                            напишите ваши предложения нам на почту
+                        </p>
+
+                        <div className="flex flex-col gap-3 mt-4">
+                            <button
+                                onClick={() => window.open("mailto:raf_android-dev@mail.ru", "_blank")}
+                                className="bg-[#4ade80] px-4 py-2 rounded-lg"
+                            >
+                                Написать пожелания по функционалу
+                            </button>
+                            <button
+                                onClick={closeVersionDialog}
+                                className="bg-[#4ade80] px-4 py-2 rounded-lg"
+                            >
+                                Закрыть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Диалоговое окно для скачивания на iOS */}
+            {isDownloadIosDialogOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center">
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#86efac] mb-4">
+                            Скачать на iOS
+                        </h3>
+                        <p className="text-lg sm:text-xl text-[#4ade80]">
+                            Наше приложение выйдет в App Store для iOS совсем скоро —
+                            когда у разработчика появится MacBook Pro 16 M3 Pro для разработки,
+                            iPhone 13 Pro Max для тестирования и лицензия разработчика App Store для публикации приложения.
+                            <br />
+                            (Да, разработчик татарин)
+                        </p>
+
+                        <div className="flex flex-col gap-3 mt-4">
+                            <button
+                                onClick={() => window.open("https://www.donationalerts.com/r/raf0707", "_blank")}
+                                className="bg-[#4ade80] px-4 py-2 rounded-lg"
+                            >
+                                Помочь разработчику с покупками
+                            </button>
+                            <button
+                                onClick={() => window.open("mailto:raf_android-dev@mail.ru", "_blank")}
+                                className="bg-[#4ade80] px-4 py-2 rounded-lg"
+                            >
+                                Связаться с разработчиком и купить ему MacBook Pro 16 M3 Pro,
+                                iPhone 13 Pro Max и лицензию разработчика App Store
+                            </button>
+                            <button
+                                onClick={closeDownloadIosDialog}
+                                className="bg-[#4ade80] px-4 py-2 rounded-lg"
+                            >
+                                Закрыть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default About;
+export default AboutApp;

@@ -4,7 +4,7 @@ import ThemeToggleButton from "./ThemeToggleButton"; // Импортируем �
 
 interface ToolbarProps {
     theme: 'light' | 'dark'; // Тип для темы
-    toggleTheme: () => void; // Функция для переключения темы
+    toggleTheme: (nextTheme: 'light' | 'dark') => void; // Функция для переключения темы
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
@@ -19,7 +19,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
                         className="app-logo w-12 h-12" // Уменьшаем логотип
                     />
                     <h2 className="text-[20px] sm:text-[20px] font-bold text-[#86efac]">
-                        FF Sensitivities
+                        FF Sensitivities Raf
                     </h2>
                 </div>
 
@@ -29,14 +29,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
                         to="/"
                         className="text-[#86efac] hover:text-[#4ade80]"
                     >
-                        <HomeIcon className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" /> {/* Уменьшаем иконки */}
+                        <HomeIcon className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" />
                     </Link>
 
                     <Link
                         to="/about"
                         className="text-[#86efac] hover:text-[#4ade80]"
                     >
-                        <Info className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" /> {/* Уменьшаем иконки */}
+                        <Info className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" />
                     </Link>
 
                     {/* Кнопка переключения темы */}

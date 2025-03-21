@@ -1,36 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, ReactNode } from "react";
 
-// Определим цвета для тем
-const lightTheme = {
-    background: '#F6FBF4',
-    surface: '#EAEFE9',
-    text: '#171D19',
-    primary: '#276A49',
-};
+interface ThemeContextType {
+    theme: "light" | "dark";
+    toggleTheme: () => void;
+}
 
-const darkTheme = {
-    background: '#0F1511',
-    surface: '#1B211D',
-    text: '#DFE4DD',
-    primary: '#91D5AC',
-};
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Создаем ThemeContext
-const ThemeContext = createContext();
-
-export const useTheme = () => useContext(ThemeContext);
-
-// Провайдер для темы
-export const ThemeProvider = ({ children }) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(true);
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [theme, setTheme] = useState<"light" | "dark">("dark");
 
     const toggleTheme = () => {
-        setIsDarkTheme((prev) => !prev);
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
     };
 
     return (
-        <ThemeContext.Provider value={{ isDarkTheme, toggleTheme, theme: isDarkTheme ? darkTheme : lightTheme }}>
-            {children}
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <div className={theme === "dark" ? "bg-[#122428] text-white" : "bg-white text-black"}>
+                {children}
+            </div>
         </ThemeContext.Provider>
     );
+};
+
+export const useTheme = () => {
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error("useTheme must be used within a ThemeProvider");
+    }
+    return context;
 };

@@ -15,7 +15,7 @@ export const everbookData: Record<string, Project[]> = {
     },
     {
       id: 'ffsensitivities',
-      title: 'FF Sensitivities',
+      title: 'FF Sensitivities Raf',
       description: 'Sensitivity settings for smooth gameplay and optimal performance!',
       image: '/images/ffsensitivities/banner.png',
       category: 'android_apps',
@@ -40,7 +40,7 @@ export const everbookData: Record<string, Project[]> = {
     },
     {
       id: 'ffsensitivities',
-      title: 'FF Sensitivities',
+      title: 'FF Sensitivities Raf',
       description: 'Настройки чувствительности для более точных хедшотов!',
       image: '/images/ffsensitivities/banner.png',
       category: 'android_apps',
