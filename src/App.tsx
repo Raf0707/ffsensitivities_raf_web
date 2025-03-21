@@ -18,7 +18,7 @@ const App: React.FC = () => {
     }, [theme]);
 
     return (
-        <Router>
+        <Router basename="/ffsensitivities_raf_web">
             {/* Передаем тему и функцию переключения в Toolbar */}
             <Toolbar theme={theme} toggleTheme={toggleTheme} />
             <Routes>
