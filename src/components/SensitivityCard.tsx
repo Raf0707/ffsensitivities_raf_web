@@ -1,4 +1,3 @@
-
 interface Model {
     manufacturer: string;
     name: string;
@@ -15,7 +14,7 @@ interface Model {
 
 const SensitivityCard = ({ model }: { model: Model }) => {
     return (
-        <div className="w-full max-w-md mx-auto border border-[#404942] rounded-xl p-4 bg-[#2A2F2C] text-[#DFE4DD] mt-4">
+        <div className="w-full max-w-md mx-auto border border-[#404942] rounded-xl p-4 sm:p-6 bg-[#2A2F2C] text-[#DFE4DD] mt-4">
             <div className="space-y-4">
                 {/* Слайдеры */}
                 <div>

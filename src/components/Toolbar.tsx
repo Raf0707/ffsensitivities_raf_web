@@ -14,7 +14,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
                 {/* Логотип и название приложения (слева) */}
                 <div className="flex items-center space-x-2">
                     <img
-                        src="/logo.png"
+                        src="/ffsensitivities_raf_web/logo.png"
                         alt="App Logo"
                         className="app-logo w-12 h-12" // Уменьшаем логотип
                     />
