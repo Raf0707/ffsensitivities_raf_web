@@ -51,7 +51,7 @@ const Home = () => {
 
         if (isOpen && !brandModels[brand]) {
             try {
-                const response = await fetch(`/src/data/${file}`);
+                const response = await fetch(`/ffsensitivities_raf_web/data/${file}`);
                 const data = await response.json();
                 setBrandModels((prev) => ({
                     ...prev,
@@ -99,12 +99,12 @@ const Home = () => {
             <Toolbar theme={theme} toggleTheme={toggleTheme} />
 
             {/* Список карточек */}
-            <div className="w-full max-w-4xl space-y-4 px-4 sm:px-12 py-6">
+            <div className="w-full max-w-4xl space-y-4 px-4 sm:px-8 py-6">
                 {cardsData.map((card, index) => (
                     <div key={index}>
                         {/* Карточка бренда */}
                         <div
-                            className="w-full border border-[#404942] rounded-xl p-4 text-center cursor-pointer relative"
+                            className="w-full border border-[#404942] rounded-xl p-4 sm:p-6 text-center cursor-pointer relative"
                             style={{ backgroundColor: colors.surface }}
                             onClick={() => handleBrandClick(card.brand, card.file)}
                         >
@@ -137,7 +137,7 @@ const Home = () => {
                                     {brandModels[card.brand]?.map((model, modelIndex) => (
                                         <div key={modelIndex}>
                                             <motion.div
-                                                className="w-full max-w-md mx-auto border border-[#404942] rounded-xl p-4 bg-[#2A2F2C] text-center cursor-pointer relative"
+                                                className="w-full max-w-md mx-auto border border-[#404942] rounded-xl p-4 sm:p-6 text-center cursor-pointer relative"
                                                 style={{ backgroundColor: colors.surface }}
                                                 onClick={() => handleModelClick(model)}
                                                 initial={{ opacity: 0, y: -20 }}

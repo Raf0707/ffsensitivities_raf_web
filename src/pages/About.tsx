@@ -1,4 +1,3 @@
-// src/pages/AboutApp.tsx
 import { useState } from "react";
 import {
     FaAndroid,
@@ -41,12 +40,15 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
     const colors = theme === "dark" ? darkThemeColors : lightThemeColors;
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center overflow-y-auto w-screen" style={{ backgroundColor: colors.background }}>
+        <div
+            className="min-h-screen flex flex-col items-center justify-center overflow-y-auto w-screen"
+            style={{ backgroundColor: colors.background }}
+        >
             {/* Основной контейнер */}
-            <div className="w-full sm:w-screen space-y-4 px-4 sm:px-12 py-6">
+            <div className="w-full max-w-screen-md mx-auto px-4 sm:px-8 py-6">
                 {/* Карточка с названием приложения */}
                 <div
-                    className="w-full border rounded-xl p-12 text-center mt-16" // Добавлен mt-16 для отступа сверху
+                    className="w-full border rounded-xl p-6 sm:p-8 text-center mt-16"
                     style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
                 >
                     <h2 className="text-[25px] sm:text-[30px] font-bold" style={{ color: colors.text }}>
@@ -59,34 +61,37 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
 
                 {/* Остальные карточки */}
                 {[
-                    { icon: null, text: "FF Sensitivities Raf – это вторичный клиент приложения FF Sensitivities.\n" +
-                            "                            ByteFlipper является единственным автором и владельцем мобильного и веб-приложения FF Sensitivities.\n" +
-                            "                            Разработка FF Sensitivities Raf основана на оригинальном приложении и не является его официальной версией.\n" +
-                            "                            Все права на оригинальный код, данные и бренд принадлежат ByteFlipper.\n" +
-                            "                            Автор FF Sensitivities оставляет за собой право потребовать удаления данного вторичного клиента в любое время.\n" +
+                    {
+                        icon: null,
+                        text: "FF Sensitivities Raf – это вторичный и неофициальный клиент приложения FF Sensitivities.\n" +
+                            "ByteFlipper является единственным автором и владельцем мобильного и веб-приложения FF Sensitivities.\n" +
+                            "Разработка FF Sensitivities Raf основана на оригинальном приложении и не является его официальной версией.\n" +
+                            "Все права на оригинальный код, данные и бренд принадлежат ByteFlipper.\n" +
+                            "Автор FF Sensitivities оставляет за собой право потребовать удаления данного вторичного неофициального клиента в любое время.\n" +
                             "\n" +
-                            "                            Этот проект распространяется без каких-либо гарантий", onClick: null},
+                            "Этот проект распространяется без каких-либо гарантий",
+                        onClick: null,
+                    },
                     { icon: <FaInfoCircle size={24} style={{ color: colors.primary }} />, text: "Версия: 1.0", onClick: openVersionDialog },
-                    { icon: <img src="/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
+                    { icon: <img src="/ffsensitivities_raf_web/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper (WEB)", onClick: () => window.open("https://byteflipper.web.app/", "_blank") },
                     { icon: <FaShieldAlt size={24} style={{ color: colors.primary }} />, text: "Политика приватности", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
                     { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Исходный код", onClick: () => window.open("https://github.com/Raf0707/ffsensitivities_web", "_blank") },
                     { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в Google Play", onClick: () => window.open("https://play.google.com/store/apps/details?id=com.byteflipper.ffsensitivities", "_blank") },
                     { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в RuStore", onClick: () => window.open("https://www.rustore.ru/catalog/app/com.byteflipper.ffsensitivities", "_blank") },
                     { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "Рафаил Кикматулин", onClick: () => window.open("https://github.com/Raf0707", "_blank") },
                     { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "raf_android-dev@mail.ru", onClick: () => window.open("mailto:raf_android-dev@mail.ru", "_blank") },
-                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "ByteFlipper", onClick: () => window.open("https://github.com/ByteFlipper-58", "_blank") },
+                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "ByteFlipper (GitHub)", onClick: () => window.open("https://github.com/ByteFlipper-58", "_blank") },
                     { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "byteflipper.business@gmail.com", onClick: () => window.open("mailto:byteflipper.business@gmail.com", "_blank") },
                     { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Другие Приложения", onClick: () => window.open("https://www.rustore.ru/catalog/developer/90b1826e", "_blank") },
                     { icon: <FaShareAlt size={24} style={{ color: colors.primary }} />, text: "Поделиться приложением", onClick: () => window.open("https://raf0707.github.io/zickreee_web", "_blank") },
                 ].map((card, index) => (
                     <div
                         key={index}
-                        className="w-full border rounded-xl p-6 text-center cursor-pointer"
+                        className="w-full border rounded-xl p-4 sm:p-6 text-center cursor-pointer mt-4"
                         style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
                         onClick={card.onClick ? card.onClick : undefined}
                     >
-
-                    <div className="flex items-center justify-center space-x-4">
+                        <div className="flex items-center justify-center space-x-4">
                             {card.icon}
                             <p className="text-xl sm:text-2xl" style={{ color: colors.text }}>
                                 {card.text}
@@ -99,7 +104,7 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
             {/* Диалоговое окно для версии */}
             {isVersionDialogOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center">
+                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center max-w-md mx-4">
                         <h3 className="text-xl sm:text-2xl font-bold text-[#86efac] mb-4">
                             Версия 1.0
                         </h3>
@@ -129,7 +134,7 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
             {/* Диалоговое окно для скачивания на iOS */}
             {isDownloadIosDialogOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center">
+                    <div className="bg-[#122428] border border-[#14442e] rounded-xl p-6 text-center max-w-md mx-4">
                         <h3 className="text-xl sm:text-2xl font-bold text-[#86efac] mb-4">
                             Скачать на iOS
                         </h3>
