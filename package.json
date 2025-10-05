@@ -1,9 +1,9 @@
 {
-  "name": "ffsensitivities",
+  "name": "Знакомства для тактильных",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://raf0707.github.io/ffsensitivities_raf_web/",
+  "homepage": "https://raf0707.github.io/tactile-meet-forms/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

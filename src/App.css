@@ -40,3 +40,7 @@
 .read-the-docs {
   color: #888;
 }
+
+.MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #276A49 !important; /* или greenDark в темной */
+}

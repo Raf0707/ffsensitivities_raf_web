@@ -52,7 +52,7 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
                     style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
                 >
                     <h2 className="text-[25px] sm:text-[30px] font-bold" style={{ color: colors.text }}>
-                        FF Sensitivities Raf
+                        Знакомства для тактильных
                     </h2>
                     <p className="text-xl sm:text-2xl" style={{ color: colors.primary }}>
                         from ByteFlipper
@@ -73,7 +73,7 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
                         onClick: null,
                     },
                     { icon: <FaInfoCircle size={24} style={{ color: colors.primary }} />, text: "Версия: 1.0", onClick: openVersionDialog },
-                    { icon: <img src="/ffsensitivities_raf_web/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper (WEB)", onClick: () => window.open("https://byteflipper.web.app/", "_blank") },
+                    { icon: <img src="tactile-meet-forms/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper (WEB)", onClick: () => window.open("https://byteflipper.web.app/", "_blank") },
                     { icon: <FaShieldAlt size={24} style={{ color: colors.primary }} />, text: "Политика приватности", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
                     { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Исходный код", onClick: () => window.open("https://github.com/Raf0707/ffsensitivities_web", "_blank") },
                     { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в Google Play", onClick: () => window.open("https://play.google.com/store/apps/details?id=com.byteflipper.ffsensitivities", "_blank") },

@@ -14,12 +14,12 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
                 {/* Логотип и название приложения (слева) */}
                 <div className="flex items-center space-x-2">
                     <img
-                        src="/ffsensitivities_raf_web/logo.png"
+                        src="../assets/app_logo.png"
                         alt="App Logo"
                         className="app-logo w-12 h-12" // Уменьшаем логотип
                     />
                     <h2 className="text-[20px] sm:text-[20px] font-bold text-[#86efac]">
-                        FF Sensitivities Raf
+                        Знакомства для тактильных
                     </h2>
                 </div>
 
