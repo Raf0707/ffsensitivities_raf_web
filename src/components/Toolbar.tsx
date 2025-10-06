@@ -15,7 +15,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
 
                 <div className="flex items-center space-x-2">
                     <img
-                        src="../tactile-meet-forms/app_logo.png"
+                        src="/app_logo.png"
                         alt="App Logo"
                         className="app-logo w-12 h-12" // Уменьшаем логотип
                     />

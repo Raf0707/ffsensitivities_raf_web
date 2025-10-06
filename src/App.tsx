@@ -24,7 +24,7 @@ const App: React.FC = () => {
     }, [theme]);
 
     return (
-        <Router basename="tactile-meet-forms">
+        <Router basename="/">
             <Toolbar theme={theme} toggleTheme={toggleTheme} />
             <Routes>
                 <Route path="/" element={<Navigate to="/home" replace />} />
