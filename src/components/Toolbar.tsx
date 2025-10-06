@@ -12,9 +12,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
         <div className="fixed top-0 left-0 w-full bg-[#122428] border-b border-[#14442e] z-50">
             <div className="max-w-2xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
                 {/* Логотип и название приложения (слева) */}
+
                 <div className="flex items-center space-x-2">
                     <img
-                        src="../assets/app_logo.png"
+                        src="../tactile-meet-forms/app_logo.png"
                         alt="App Logo"
                         className="app-logo w-12 h-12" // Уменьшаем логотип
                     />
@@ -27,14 +28,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ theme, toggleTheme }) => {
                 <div className="flex items-center space-x-4">
                     <Link
                         to="/"
-                        className="text-[#86efac] hover:text-[#4ade80]"
+                        className="text-[#86efac] hover:text-[#4ade80] flex items-center"
                     >
                         <HomeIcon className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" />
                     </Link>
 
                     <Link
                         to="/about"
-                        className="text-[#86efac] hover:text-[#4ade80]"
+                        className="text-[#86efac] hover:text-[#4ade80] flex items-center"
                     >
                         <Info className="w-6 h-6 sm:w-6 sm:h-6" stroke="#86efac" />
                     </Link>

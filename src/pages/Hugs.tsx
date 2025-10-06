@@ -45,7 +45,7 @@ const HUG_TYPES = [
 ];
 
 const HUG_AVOID = [
-    "Нет таких",
+    "Нет таких мест",
     "Со слишком сильным давлением",
     "Слишком долгие",
     "С незнакомыми",
@@ -99,6 +99,7 @@ export default function Hugs({ theme, toggleTheme }: PageProps) {
         s.countryCity &&
         s.tg &&
         s.meetingTypes.length > 0 &&
+        s.favoriteHugPlace &&
         s.farewellTypes.length > 0;
 
     const copyToClipboard = () => {
@@ -254,7 +255,7 @@ export default function Hugs({ theme, toggleTheme }: PageProps) {
                         />
 
                         <TextField
-                            label="Телеграм-ник"
+                            label="телеграм-ник (без @)"
                             fullWidth
                             margin="normal"
                             value={state.tg}
@@ -290,17 +291,21 @@ export default function Hugs({ theme, toggleTheme }: PageProps) {
                             fullWidth
                             margin="normal"
                             value={state.favoriteHugPlace}
+                            inputProps={{ maxLength: 50 }}   // ⬅️ ограничение 50 символов
                             onChange={(e) => setState({ ...state, favoriteHugPlace: e.target.value })}
                             sx={textFieldSx}
                         />
+
                         <TextField
                             label="Дополнительно (по желанию)"
                             fullWidth
                             margin="normal"
                             value={state.notes}
+                            inputProps={{ maxLength: 50 }}   // ⬅️ ограничение 50 символов
                             onChange={(e) => setState({ ...state, notes: e.target.value })}
                             sx={textFieldSx}
                         />
+
                     </CardContent>
                 </Card>
 

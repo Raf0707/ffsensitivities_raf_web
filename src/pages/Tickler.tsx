@@ -41,7 +41,7 @@ const PLACES = [
     "Спина",
 ];
 
-const NO_TICKLISH = ["Нет таких", ...PLACES];
+const NO_TICKLISH = ["Нет таких мест", ...PLACES];
 
 // --- шкала предпочтений ---
 const levelToPrefTickler = (lvl: number) =>
@@ -255,7 +255,7 @@ export default function Tickler({ theme, toggleTheme }: PageProps) {
                         />
 
                         <TextField
-                            label="Телеграм-ник"
+                            label="телеграм-ник (без @)"
                             fullWidth
                             margin="normal"
                             value={state.tg}
@@ -362,29 +362,47 @@ export default function Tickler({ theme, toggleTheme }: PageProps) {
                         <Typography fontWeight="bold" style={{ color: textColor }}>
                             Избегаемые места
                         </Typography>
-                        {NO_TICKLISH.map((place) => (
-                            <FormControlLabel
-                                key={place}
-                                control={
-                                    <Checkbox
-                                        checked={state.noFavouritePlaces.includes(place)}
-                                        onChange={(e) =>
-                                            setState({
-                                                ...state,
-                                                noFavouritePlaces: e.target.checked
-                                                    ? [...state.noFavouritePlaces, place]
-                                                    : state.noFavouritePlaces.filter((p) => p !== place),
-                                            })
-                                        }
-                                        sx={checkboxSx}
-                                    />
-                                }
-                                label={place}
-                                style={{ color: textColor }}
-                            />
-                        ))}
+                        {NO_TICKLISH.map((place) => {
+                            const isNoneSelected = state.noFavouritePlaces.includes("Нет таких мест");
+                            const isNoneOption = place === "Нет таких мест";
+
+                            return (
+                                <FormControlLabel
+                                    key={place}
+                                    control={
+                                        <Checkbox
+                                            checked={state.noFavouritePlaces.includes(place)}
+                                            disabled={!isNoneOption && isNoneSelected} // если "Нет таких мест" выбрано — блокируем остальные
+                                            onChange={(e) => {
+                                                const checked = e.target.checked;
+                                                setState((prev) => {
+                                                    let updated = [...prev.noFavouritePlaces];
+                                                    if (checked) {
+                                                        if (isNoneOption) {
+                                                            // если выбрано "Нет таких мест" — сбрасываем остальные
+                                                            updated = ["Нет таких мест"];
+                                                        } else {
+                                                            // иначе добавляем в список
+                                                            updated = updated.filter((p) => p !== "Нет таких мест");
+                                                            updated.push(place);
+                                                        }
+                                                    } else {
+                                                        updated = updated.filter((p) => p !== place);
+                                                    }
+                                                    return { ...prev, noFavouritePlaces: updated };
+                                                });
+                                            }}
+                                            sx={checkboxSx}
+                                        />
+                                    }
+                                    label={place}
+                                    style={{ color: textColor }}
+                                />
+                            );
+                        })}
                     </CardContent>
                 </Card>
+
 
                 {/* Действия */}
                 <Button

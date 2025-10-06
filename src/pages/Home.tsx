@@ -100,13 +100,30 @@ const Home = () => {
                                     if (child.children) {
                                         toggleCard(child.name);
                                     } else {
+                                        // --- Щекотка ---
                                         if (child.name === "Тиклер") navigate("/tickler");
                                         else if (child.name === "Тикля") navigate("/ticklee");
                                         else if (child.name === "Свич") navigate("/switch");
-                                        //else if (child.name === "Обнимашки") navigate("/hugs");
+
+                                        // --- Массаж ---
+                                        else if (child.name === "Классический немедицинский" && openCards["Делаю массаж"]) {
+                                            navigate("/massage/nonMedical/giver");
+                                        } else if (child.name === "Классический немедицинский" && openCards["Мне делают массаж"]) {
+                                            navigate("/massage/nonMedical/receiver");
+                                        } else if (child.name === "Смайл-терапия" && openCards["Делаю массаж"]) {
+                                            navigate("/massage/smile/giver");
+                                        } else if (child.name === "Смайл-терапия" && openCards["Мне делают массаж"]) {
+                                            navigate("/massage/smile/receiver");
+                                        }
+
+                                        // --- Обнимашки ---
+                                        else if (child.name === "Обнимашки") navigate("/hugs");
+
+                                        // --- запасной вариант ---
                                         else navigate(`/${child.name.toLowerCase()}`);
                                     }
                                 }}
+
 
                             >
                                 <h3 className="text-[20px] sm:text-[24px] font-bold mb-2">
@@ -142,6 +159,21 @@ const Home = () => {
             <Toolbar theme={theme} toggleTheme={toggleTheme} />
 
             <div className="w-full max-w-4xl space-y-4 px-4 sm:px-8 py-6">
+
+                {/* Сообщение пользователю */}
+                <div
+                    className="w-full border rounded-xl p-4 sm:p-6 text-center"
+                    style={{ backgroundColor: colors.surface, borderColor: colors.primary }}
+                >
+                    <p className="text-lg sm:text-xl font-semibold" style={{ color: colors.primary }}>
+                        📝 Заполни анкету, скопируй и отправь её боту в Telegram!
+                    </p>
+                    <p className="text-sm sm:text-base mt-2" style={{ color: colors.text }}>
+                        Это поможет быстрее находить единомышленников и согласовывать комфортные встречи.
+                    </p>
+                </div>
+
+                {/* Карточки с разделами */}
                 {cardsData.map((card, index) => (
                     <div key={index}>
                         <div
@@ -179,6 +211,7 @@ const Home = () => {
             </div>
         </div>
     );
+
 };
 
 export default Home;

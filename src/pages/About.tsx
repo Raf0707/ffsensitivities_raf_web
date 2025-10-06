@@ -1,13 +1,12 @@
 import { useState } from "react";
 import {
-    FaAndroid,
     FaInfoCircle,
     FaCode,
-    FaUser,
     FaEnvelope,
     FaShieldAlt,
-    FaShareAlt,
+    FaFileContract, FaGlobe, FaGithub, FaTelegramPlane,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 interface AboutProps {
     theme: "light" | "dark";
@@ -17,6 +16,8 @@ interface AboutProps {
 const AboutApp: React.FC<AboutProps> = ({ theme }) => {
     const [isVersionDialogOpen, setVersionDialogOpen] = useState(false);
     const [isDownloadIosDialogOpen, setDownloadIosDialogOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const openVersionDialog = () => setVersionDialogOpen(true);
     const closeVersionDialog = () => setVersionDialogOpen(false);
@@ -55,7 +56,7 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
                         Знакомства для тактильных
                     </h2>
                     <p className="text-xl sm:text-2xl" style={{ color: colors.primary }}>
-                        from ByteFlipper
+                        by Raf&lt;/&gt;Console Studio
                     </p>
                 </div>
 
@@ -63,27 +64,46 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
                 {[
                     {
                         icon: null,
-                        text: "FF Sensitivities Raf – это вторичный и неофициальный клиент приложения FF Sensitivities.\n" +
-                            "ByteFlipper является единственным автором и владельцем мобильного и веб-приложения FF Sensitivities.\n" +
-                            "Разработка FF Sensitivities Raf основана на оригинальном приложении и не является его официальной версией.\n" +
-                            "Все права на оригинальный код, данные и бренд принадлежат ByteFlipper.\n" +
-                            "Автор FF Sensitivities оставляет за собой право потребовать удаления данного вторичного неофициального клиента в любое время.\n" +
-                            "\n" +
-                            "Этот проект распространяется без каких-либо гарантий",
+                        text: (
+                            <div style={{ textAlign: "left", whiteSpace: "pre-line", lineHeight: "1.6em" }}>
+                                <p>
+                                    Добро пожаловать! Ты попал в уютное пространство, где люди ценят тактильность и тепло!
+                                    Здесь мы собираем тех, кто любит объятия, массаж, смайл-терапию и другие формы дружеского и заботливого прикосновения.
+                                </p>
+
+                                <p>Наше приложение помогает:</p>
+                                <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+                                    <li>🤗 находить единомышленников;</li>
+                                    <li>💬 договариваться о встречах в комфортном формате;</li>
+                                    <li>📝 заполнять анкеты, чтобы лучше понимать предпочтения друг друга;</li>
+                                    <li>⚖️ устанавливать правила и границы — всё ради доверия и безопасности.</li>
+                                </ul>
+
+                                <p>
+                                    Здесь нет места холодности и формальностям — только искренность, уважение и желание делиться теплом.
+                                    Открой для себя новые знакомства, расслабление и поддержку через простые и такие важные человеческие вещи — прикосновения и внимание.
+                                </p>
+
+                                <p>
+                                    ⚖️ Юридическая информация<br />
+                                    Этот проект распространяется без каких-либо гарантий.
+                                </p>
+                            </div>
+                        ),
                         onClick: null,
                     },
                     { icon: <FaInfoCircle size={24} style={{ color: colors.primary }} />, text: "Версия: 1.0", onClick: openVersionDialog },
-                    { icon: <img src="tactile-meet-forms/favicon.svg" alt="Favicon" width={24} height={24} />, text: "ByteFlipper (WEB)", onClick: () => window.open("https://byteflipper.web.app/", "_blank") },
-                    { icon: <FaShieldAlt size={24} style={{ color: colors.primary }} />, text: "Политика приватности", onClick: () => window.open("https://byteflipper.web.app/privacy-policy", "_blank") },
-                    { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Исходный код", onClick: () => window.open("https://github.com/Raf0707/ffsensitivities_web", "_blank") },
-                    { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в Google Play", onClick: () => window.open("https://play.google.com/store/apps/details?id=com.byteflipper.ffsensitivities", "_blank") },
-                    { icon: <FaAndroid size={24} style={{ color: colors.primary }} />, text: "Скачать на Android в RuStore", onClick: () => window.open("https://www.rustore.ru/catalog/app/com.byteflipper.ffsensitivities", "_blank") },
-                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "Рафаил Кикматулин", onClick: () => window.open("https://github.com/Raf0707", "_blank") },
+                    { icon: <FaShieldAlt size={24} style={{ color: colors.primary }} />, text: "Политика конфиденциальности", onClick: () => navigate("/privacy") },
+                    { icon: <FaFileContract size={24} style={{ color: colors.primary }} />, text: "Пользовательское соглашение", onClick: () => navigate("/terms") },
+                    // 🆕 Бот
+                    { icon: <FaTelegramPlane size={24} style={{ color: colors.primary }} />, text: "Телеграм-бот @tactilemeet_bot", onClick: () => window.open("https://t.me/tactilemeet_bot", "_blank") },
+
+                    // 🆕 Канал
+                    { icon: <FaTelegramPlane size={24} style={{ color: colors.primary }} />, text: "Канал разработчика", onClick: () => window.open("https://t.me/tactilemeet", "_blank") },
+                    { icon: <FaGithub size={24} style={{ color: colors.primary }} />, text: "Рафаил Кикматулин", onClick: () => window.open("https://github.com/Raf0707", "_blank") },
+                    { icon: <FaGlobe size={24} style={{ color: colors.primary }} />, text: "Наш сайт", onClick: () => window.open("https://raf-console-studio.web.app/main_ru/", "_blank") },
                     { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "raf_android-dev@mail.ru", onClick: () => window.open("mailto:raf_android-dev@mail.ru", "_blank") },
-                    { icon: <FaUser size={24} style={{ color: colors.primary }} />, text: "ByteFlipper (GitHub)", onClick: () => window.open("https://github.com/ByteFlipper-58", "_blank") },
-                    { icon: <FaEnvelope size={24} style={{ color: colors.primary }} />, text: "byteflipper.business@gmail.com", onClick: () => window.open("mailto:byteflipper.business@gmail.com", "_blank") },
                     { icon: <FaCode size={24} style={{ color: colors.primary }} />, text: "Другие Приложения", onClick: () => window.open("https://www.rustore.ru/catalog/developer/90b1826e", "_blank") },
-                    { icon: <FaShareAlt size={24} style={{ color: colors.primary }} />, text: "Поделиться приложением", onClick: () => window.open("https://raf0707.github.io/zickreee_web", "_blank") },
                 ].map((card, index) => (
                     <div
                         key={index}
@@ -93,9 +113,15 @@ const AboutApp: React.FC<AboutProps> = ({ theme }) => {
                     >
                         <div className="flex items-center justify-center space-x-4">
                             {card.icon}
-                            <p className="text-xl sm:text-2xl" style={{ color: colors.text }}>
-                                {card.text}
-                            </p>
+                            {typeof card.text === "string" ? (
+                                <p className="text-xl sm:text-2xl" style={{ color: colors.text }}>
+                                    {card.text}
+                                </p>
+                            ) : (
+                                <div className="text-lg sm:text-xl" style={{ color: colors.text }}>
+                                    {card.text}
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}

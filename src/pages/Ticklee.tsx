@@ -43,8 +43,8 @@ const PLACES = [
     "Спина",
 ];
 
-const NO_TICKLISH = ["Нет таких", ...PLACES];
-const TABU = ["Нет таких", ...PLACES];
+const NO_TICKLISH = ["Нет таких мест", ...PLACES];
+const TABU = ["Нет таких мест", ...PLACES];
 
 // шкала предпочтений для Тикли
 const levelToPrefTicklee = (lvl: number) =>
@@ -262,7 +262,7 @@ export default function Ticklee({ theme, toggleTheme }: PageProps) {
                         />
 
                         <TextField
-                            label="Телеграм-ник"
+                            label="телеграм-ник (без @)"
                             fullWidth
                             margin="normal"
                             value={state.tg}
@@ -382,27 +382,42 @@ export default function Ticklee({ theme, toggleTheme }: PageProps) {
                         <Typography fontWeight="bold" style={{ color: textColor }}>
                             Не щекотать
                         </Typography>
-                        {NO_TICKLISH.map((place) => (
-                            <FormControlLabel
-                                key={place}
-                                control={
-                                    <Checkbox
-                                        checked={state.noTicklishPlaces.includes(place)}
-                                        onChange={(e) =>
-                                            setState({
-                                                ...state,
-                                                noTicklishPlaces: e.target.checked
-                                                    ? [...state.noTicklishPlaces, place]
-                                                    : state.noTicklishPlaces.filter((p) => p !== place),
-                                            })
-                                        }
-                                        sx={checkboxSx}
-                                    />
-                                }
-                                label={place}
-                                style={{ color: textColor }}
-                            />
-                        ))}
+                        {NO_TICKLISH.map((place) => {
+                            const isNoneSelected = state.noTicklishPlaces.includes("Нет таких мест");
+                            const isNoneOption = place === "Нет таких мест";
+
+                            return (
+                                <FormControlLabel
+                                    key={place}
+                                    control={
+                                        <Checkbox
+                                            checked={state.noTicklishPlaces.includes(place)}
+                                            disabled={!isNoneOption && isNoneSelected} // блокируем если выбрано "Нет таких мест"
+                                            onChange={(e) => {
+                                                const checked = e.target.checked;
+                                                setState((prev) => {
+                                                    let updated = [...prev.noTicklishPlaces];
+                                                    if (checked) {
+                                                        if (isNoneOption) {
+                                                            updated = ["Нет таких мест"];
+                                                        } else {
+                                                            updated = updated.filter((p) => p !== "Нет таких мест");
+                                                            updated.push(place);
+                                                        }
+                                                    } else {
+                                                        updated = updated.filter((p) => p !== place);
+                                                    }
+                                                    return { ...prev, noTicklishPlaces: updated };
+                                                });
+                                            }}
+                                            sx={checkboxSx}
+                                        />
+                                    }
+                                    label={place}
+                                    style={{ color: textColor }}
+                                />
+                            );
+                        })}
                     </CardContent>
                 </Card>
 
@@ -412,27 +427,42 @@ export default function Ticklee({ theme, toggleTheme }: PageProps) {
                         <Typography fontWeight="bold" style={{ color: textColor }}>
                             Табу (запретные места)
                         </Typography>
-                        {TABU.map((place) => (
-                            <FormControlLabel
-                                key={place}
-                                control={
-                                    <Checkbox
-                                        checked={state.tabuPlaces.includes(place)}
-                                        onChange={(e) =>
-                                            setState({
-                                                ...state,
-                                                tabuPlaces: e.target.checked
-                                                    ? [...state.tabuPlaces, place]
-                                                    : state.tabuPlaces.filter((p) => p !== place),
-                                            })
-                                        }
-                                        sx={checkboxSx}
-                                    />
-                                }
-                                label={place}
-                                style={{ color: textColor }}
-                            />
-                        ))}
+                        {TABU.map((place) => {
+                            const isNoneSelected = state.tabuPlaces.includes("Нет таких мест");
+                            const isNoneOption = place === "Нет таких мест";
+
+                            return (
+                                <FormControlLabel
+                                    key={place}
+                                    control={
+                                        <Checkbox
+                                            checked={state.tabuPlaces.includes(place)}
+                                            disabled={!isNoneOption && isNoneSelected} // блокируем если выбрано "Нет таких мест"
+                                            onChange={(e) => {
+                                                const checked = e.target.checked;
+                                                setState((prev) => {
+                                                    let updated = [...prev.tabuPlaces];
+                                                    if (checked) {
+                                                        if (isNoneOption) {
+                                                            updated = ["Нет таких мест"];
+                                                        } else {
+                                                            updated = updated.filter((p) => p !== "Нет таких мест");
+                                                            updated.push(place);
+                                                        }
+                                                    } else {
+                                                        updated = updated.filter((p) => p !== place);
+                                                    }
+                                                    return { ...prev, tabuPlaces: updated };
+                                                });
+                                            }}
+                                            sx={checkboxSx}
+                                        />
+                                    }
+                                    label={place}
+                                    style={{ color: textColor }}
+                                />
+                            );
+                        })}
                     </CardContent>
                 </Card>
 
